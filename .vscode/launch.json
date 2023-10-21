@@ -1,0 +1,19 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "with args",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${fileDirname}",
+            // "args": ["--pcap_path", "lo", "--taskid", "0", "--mode", "1"],
+            "args": ["--pcap_path", "oneUE.pcap", "--taskid", "0", "--mode", "0"],
+            "asRoot": true,
+            "console": "integratedTerminal",
+        }
+    ]
+}
