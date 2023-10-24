@@ -188,9 +188,10 @@ func UEFlowMapToStore() {
 
 		}
 		//fmt.Println("UEFlow")
-		UEflowStore(rubbishList)
+		if rubbishList.Len() > 0 {
+			go UEflowStore(rubbishList)
+		}
 	}
-
 }
 
 func UEflowStore(rubbishList *list.List) {
@@ -209,6 +210,7 @@ func UEflowStore(rubbishList *list.List) {
 			DstIP:           flowInfo.DstIP,
 			//TimeID          uint64
 			StatusFlow: 0,
+			TaskID:     flowInfo.TaskID,
 		}
 		UeFlowList.PushBack(fl)
 		for cur := flowInfo.PacketList.Front(); cur != nil; cur = cur.Next() {
@@ -264,9 +266,9 @@ func TimeFlowMapToStore() {
 					// fmt.Println("TIMEFLOW:", i)
 					time.Sleep(30)
 					if nowTime-flowInfo.EndTimeUs < 5e9 {
-						fmt.Println("flowId: ", flowInfo.FlowID, ",  time: ", flowInfo.EndTimeUs)
+						// fmt.Println("flowId: ", flowInfo.FlowID, ",  time: ", flowInfo.EndTimeUs)
 						rubbishList.PushBack(flowInfo)
-						fmt.Println(deleteFlow(flowInfo.FlowID, FlowTable_Time))
+						// fmt.Println(deleteFlow(flowInfo.FlowID, FlowTable_Time))
 						flowCount_Time--
 					}
 				}
@@ -275,9 +277,10 @@ func TimeFlowMapToStore() {
 
 		}
 		//fmt.Println("TimeFlow")
-		TimeflowStore(rubbishList)
+		if rubbishList.Len() > 0 {
+			go TimeflowStore(rubbishList)
+		}
 	}
-
 }
 
 func TimeflowStore(rubbishList *list.List) {
@@ -296,6 +299,7 @@ func TimeflowStore(rubbishList *list.List) {
 			DstIP:           flowInfo.DstIP,
 			//TimeID          uint64
 			StatusFlow: 0,
+			TaskID:     flowInfo.TaskID,
 		}
 		TimeFlowList.PushBack(fl)
 
