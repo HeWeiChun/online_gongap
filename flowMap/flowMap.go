@@ -178,7 +178,7 @@ func UEFlowMapToStore() {
 					if nowTime-flowInfo.EndTimeUs < 5e9 {
 						fmt.Println("flowId: ", flowInfo.FlowID, ",  time: ", flowInfo.EndTimeUs)
 						rubbishList.PushBack(flowInfo)
-						fmt.Println(deleteFlow(flowInfo.FlowID, FlowTable_UE))
+						deleteFlow(flowInfo.FlowID, FlowTable_UE)
 						flowCount_UE--
 					}
 
@@ -266,9 +266,9 @@ func TimeFlowMapToStore() {
 					// fmt.Println("TIMEFLOW:", i)
 					time.Sleep(30)
 					if nowTime-flowInfo.EndTimeUs < 5e9 {
-						// fmt.Println("flowId: ", flowInfo.FlowID, ",  time: ", flowInfo.EndTimeUs)
+						fmt.Println("flowId: ", flowInfo.FlowID, ",  time: ", flowInfo.EndTimeUs)
 						rubbishList.PushBack(flowInfo)
-						// fmt.Println(deleteFlow(flowInfo.FlowID, FlowTable_Time))
+						deleteFlow(flowInfo.FlowID, FlowTable_Time)
 						flowCount_Time--
 					}
 				}
