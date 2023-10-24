@@ -4,11 +4,12 @@ import (
 	"container/list"
 	"errors"
 	"fmt"
+	"strconv"
+	"time"
+
 	"github.com/Freddy/sctp_flowmap/database/PacketDB"
 	"github.com/Freddy/sctp_flowmap/database/TimeFlow"
 	"github.com/Freddy/sctp_flowmap/database/UEFlow"
-	"strconv"
-	"time"
 )
 
 type semaphore struct {
