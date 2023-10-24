@@ -3,11 +3,10 @@ package PacketDB
 import (
 	"container/list"
 	_ "container/list"
-	"fmt"
+	_ "fmt"
 	"github.com/Freddy/sctp_flowmap/database"
 	"log"
 )
-
 
 func init() {
 	creatPacketUETable()
@@ -22,9 +21,8 @@ func InsertPacketUE(PacketList *list.List) {
 	checkErr(err)
 	stmt, err := tx.Prepare(sqlStr)
 	checkErr(err)
-	for info := PacketList.Front(); info != nil; info = info.Next(){
+	for info := PacketList.Front(); info != nil; info = info.Next() {
 		packet_sql := info.Value.(*Packet)
-		fmt.Println("db_ue_packet:",packet_sql.NgapType)
 		if _, err := stmt.Exec(
 			//packet_sql.PacketId,
 			packet_sql.NgapType,
@@ -40,6 +38,9 @@ func InsertPacketUE(PacketList *list.List) {
 			packet_sql.DirSeq,
 			packet_sql.FlowUEID,
 			packet_sql.FlowTimeID,
+			packet_sql.InitiatingMessage,
+			packet_sql.SuccessfulOutcome,
+			packet_sql.UnsuccessfulOutcome,
 			packet_sql.StatusPacket,
 		); err != nil {
 			log.Fatal(err)
@@ -57,9 +58,8 @@ func InsertPacketTime(PacketList *list.List) {
 	checkErr(err)
 	stmt, err := tx.Prepare(sqlStr)
 	checkErr(err)
-	for info := PacketList.Front(); info != nil; info = info.Next(){
+	for info := PacketList.Front(); info != nil; info = info.Next() {
 		packet_sql := info.Value.(*Packet)
-		fmt.Println("db_time_packet:",packet_sql.NgapType)
 		if _, err := stmt.Exec(
 			//packet_sql.PacketId,
 			packet_sql.NgapType,
@@ -75,6 +75,9 @@ func InsertPacketTime(PacketList *list.List) {
 			packet_sql.DirSeq,
 			packet_sql.FlowUEID,
 			packet_sql.FlowTimeID,
+			packet_sql.InitiatingMessage,
+			packet_sql.SuccessfulOutcome,
+			packet_sql.UnsuccessfulOutcome,
 			packet_sql.StatusPacket,
 		); err != nil {
 			log.Fatal(err)
@@ -83,6 +86,7 @@ func InsertPacketTime(PacketList *list.List) {
 	}
 	checkErr(tx.Commit())
 }
+
 /*
 func QueryFlows() {
 	var sqlStr string = queryPacketSQL
@@ -100,8 +104,6 @@ func QueryFlows() {
 }
 
 */
-
-
 
 func creatPacketUETable() {
 	var sqlStr string = creatPacketTableUESQL
@@ -132,8 +134,3 @@ func checkErr(err error) {
 		log.Fatal(err)
 	}
 }
-
-
-
-
-

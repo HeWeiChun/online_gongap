@@ -39,7 +39,6 @@ type FlowInfo struct {
 	TaskID          string
 }
 type Packet struct {
-	FlowID              string
 	NgapType            string
 	NgapProcedureCode   string
 	NgapRoute           string
@@ -54,6 +53,7 @@ type Packet struct {
 	VerificationTag     uint32
 	SrcIP               string
 	DstIP               string
+	FlowID              string
 	TimeID              string
 	DirSeq              int8
 	InitiatingMessage   uint8

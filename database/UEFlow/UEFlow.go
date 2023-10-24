@@ -7,7 +7,7 @@ import (
 
 type UeFlow struct {
 	FlowId          string //流哈希id
-	RanUeNgapId     uint64 //包哈希id
+	RanUeNgapId     int64  //包哈希id
 	TotalNum        uint32
 	BeginTime       time.Time
 	LatestTime      time.Time
@@ -38,7 +38,7 @@ var queryUEFlowLogSQL = `
 var createUEFlowTableSQL = `
 CREATE TABLE IF NOT EXISTS ` + UeFlowTable + ` (
 	flow_id String,
-	ran_ue_ngap_id UInt64,
+	ran_ue_ngap_id Int64,
 	total_num UInt32,
 	start_second UInt64,
 	end_second UInt64,

@@ -134,21 +134,21 @@ func Decode(interfaceName string, task string, mode string) {
 						UnsuccessfulOutcome: Packet_UE.UnsuccessfulOutcome,
 					}
 
-					flowUEID, UEID := flowMap.Count_UE_ID(Packet_UE, task)
-					strFlowUEID := strconv.FormatUint(flowUEID, 10)
-					Packet_UE.FlowID = strFlowUEID
-					if UEID {
-						flowMap.Put(Packet_UE, flowMap.FlowTable_UE, strFlowUEID, task, "UE")
-					}
+					if Packet_UE.RAN_UE_NGAP_ID != -1 {
+						flowUEID := flowMap.Count_UE_ID(Packet_UE, task)
+						flowTimeID := flowMap.Count_Time_ID(Packet_Time, TimeFirst, task)
 
-					flowTimeID, TimeID := flowMap.Count_Time_ID(Packet_Time, TimeFirst, task)
-					strFlowTimeID := strconv.FormatUint(flowTimeID, 10)
-					Packet_Time.FlowID = strFlowTimeID
-					if TimeID {
-						flowMap.Put(Packet_Time, flowMap.FlowTable_Time, strFlowTimeID, task,"Time")
+						strFlowUEID := strconv.FormatUint(flowUEID, 10)
+						strFlowTimeID := strconv.FormatUint(flowTimeID, 10)
+						Packet_UE.FlowID = strFlowUEID
+						Packet_UE.TimeID = strFlowTimeID
+						Packet_Time.TimeID = strFlowTimeID
+						flowMap.Put(Packet_UE, flowMap.FlowTable_UE, strFlowUEID, task, "UE")
+						flowMap.Put(Packet_Time, flowMap.FlowTable_Time, strFlowTimeID, task, "Time")
+						// 输出Packet_UE
+						// fmt.Println(Packet_Time.ArriveTimeUs, Packet_Time.ArriveTime, Packet_Time.RAN_UE_NGAP_ID, Packet_Time.NgapType, Packet_Time.NgapProcedureCode, Packet_Time.VerificationTag, Packet_Time.DstIP, Packet_Time.SrcIP, Packet_Time.PacketLen)
+
 					}
-					// 输出Packet_UE
-					fmt.Println(Packet_Time.ArriveTimeUs, Packet_Time.ArriveTime, Packet_Time.RAN_UE_NGAP_ID, Packet_Time.NgapType, Packet_Time.NgapProcedureCode, Packet_Time.VerificationTag, Packet_Time.DstIP, Packet_Time.SrcIP, Packet_Time.PacketLen)
 				}
 			}
 		// 接收到退出信号后，输出"接收到退出信号"

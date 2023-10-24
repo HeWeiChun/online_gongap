@@ -7,7 +7,7 @@ import (
 
 type TimeFlow struct {
 	FlowId          string //流哈希id
-	RanUeNgapId     uint64 //包哈希id
+	RanUeNgapId     int64  //包哈希id
 	TotalNum        uint32
 	BeginTime       time.Time
 	LatestTime      time.Time
@@ -39,7 +39,7 @@ var queryTimeFlowLogSQL = `
 var createTimeFlowTableSQL = `
 CREATE TABLE IF NOT EXISTS ` + TimeFlowTable + ` (
 	flow_id String,
-	ran_ue_ngap_id UInt64,
+	ran_ue_ngap_id Int64,
 	total_num UInt32,
 	begin_time DateTime64(6), 
 	latest_time DateTime64(6), 
