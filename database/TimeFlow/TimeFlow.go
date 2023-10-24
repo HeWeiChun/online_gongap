@@ -19,7 +19,7 @@ type TimeFlow struct {
 	TaskID     string
 }
 
-var TimeFlowTable = "sctp.time_flow"
+var TimeFlowTable = "sctp_test.time_flow"
 
 var insertTimeFlowSQL = `
 	INSERT INTO ` + TimeFlowTable +

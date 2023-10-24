@@ -64,6 +64,7 @@ type Packet struct {
 func loadFlow(flowId string, flowTable []*Flow) (*FlowInfo, bool) {
 	numFlowId, _ := strconv.ParseUint(flowId, 10, 64)
 	cur := flowTable[numFlowId%TABLE_SIZE]
+	//mutex.Lock()
 	if cur == nil {
 		return nil, false
 	}

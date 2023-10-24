@@ -4,6 +4,7 @@ import (
 	"container/list"
 	"github.com/Freddy/sctp_flowmap/database"
 	"log"
+	"fmt"
 )
 
 func init() {
@@ -19,6 +20,7 @@ func InsertTimeFlow(TimeFlowList *list.List) {
 	checkErr(err)
 	for info := TimeFlowList.Front(); info != nil; info = info.Next() {
 		fl := info.Value.(*TimeFlow)
+		fmt.Println("db_flow_time:",fl.FlowId)
 		if _, err := stmt.Exec(
 			fl.FlowId,
 			fl.RanUeNgapId,

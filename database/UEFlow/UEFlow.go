@@ -19,7 +19,7 @@ type UeFlow struct {
 	TaskID     string
 }
 
-var UeFlowTable = "sctp.ue_flow"
+var UeFlowTable = "sctp_test.ue_flow"
 var insertUeFlowSQL = `
 	INSERT INTO ` + UeFlowTable +
 	`

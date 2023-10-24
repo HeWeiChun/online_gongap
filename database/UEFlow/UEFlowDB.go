@@ -4,6 +4,7 @@ import (
 	"container/list"
 	"github.com/Freddy/sctp_flowmap/database"
 	"log"
+	"fmt"
 )
 
 func init() {
@@ -18,6 +19,7 @@ func InsertUeFlow(UeFlowList *list.List) {
 	checkErr(err)
 	for info := UeFlowList.Front(); info != nil; info = info.Next() {
 		fl := info.Value.(*UeFlow)
+		fmt.Println("db_ue_flow:",fl.FlowId)
 		if _, err := stmt.Exec(
 			fl.FlowId,
 			fl.RanUeNgapId,

@@ -14,7 +14,7 @@ public class test {
             // Go解析脚本
             System.out.println("执行检测, 线程名字为 = " + Thread.currentThread().getName());
             // 构建进程
-            ProcessBuilder processBuilder = new ProcessBuilder("go", "run", "main.go");
+            ProcessBuilder processBuilder = new ProcessBuilder("go", "run", "main.go", "--pcap_path", "lo", "--mode", "1", "--taskid", "0");
             processBuilder.redirectErrorStream(true); // 合并标准输出和标准错误流
             Process process = processBuilder.start();
             System.out.println("检测脚本运行的PID为:" + process.pid());
@@ -23,7 +23,7 @@ public class test {
             executor.schedule(() -> {
                 System.out.println("停止脚本运行的PID为:" + process.pid());
                 process.destroy();
-            }, 20, TimeUnit.SECONDS);
+            }, 2, TimeUnit.SECONDS);
             executor.shutdown();
 
 
@@ -31,11 +31,9 @@ public class test {
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
-
-
             int exitCode = process.waitFor();
             System.out.println("脚本执行完毕, 退出码：" + exitCode);
-
+            reader.close();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

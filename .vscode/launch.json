@@ -5,15 +5,28 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "go_54f17dee"
+        },
+        {
             "name": "with args",
             "type": "go",
             "request": "launch",
             "mode": "auto",
             "program": "${fileDirname}",
-            // "args": ["--pcap_path", "lo", "--taskid", "0", "--mode", "1"],
-            "args": ["--pcap_path", "oneUE.pcap", "--taskid", "0", "--mode", "0"],
+            "args": [
+                "--pcap_path",
+                "oneUE.pcap",
+                "--taskid",
+                "0",
+                "--mode",
+                "0"
+            ],
             "asRoot": true,
-            "console": "integratedTerminal",
+            "console": "integratedTerminal"
         }
     ]
 }
